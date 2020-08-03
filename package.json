@@ -14,6 +14,7 @@
     "eslint-config-google": "^0.14.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.4",
+    "husky": "^4.2.5",
     "jest": "^26.2.2",
     "prettier": "^2.0.5",
     "prettier-eslint": "^11.0.0",
@@ -25,7 +26,11 @@
   "scripts": {
     "lint": "eslint ./src --ext js",
     "format": "eslint ./src --ext js --fix",
-    "pre-commit": "yarn lint",
     "test": "jest"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn format"
+    }
   }
 }
