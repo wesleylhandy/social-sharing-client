@@ -25,6 +25,7 @@
   "scripts": {
     "lint": "eslint ./src --ext js",
     "format": "eslint ./src --ext js --fix",
+    "pre-commit": "yarn lint",
     "test": "jest"
   }
 }

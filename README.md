@@ -8,7 +8,7 @@ The **CBN Sharing Client** should be loaded onto the DOM via asychronous, non-bl
 
 ```html
 <script async src="/path/to/cbn-share-api.js">
-<script async src="/path/to/cbnsharing-client.js">
+<script async src="/path/to/cbn-sharing-client.js">
 <link rel="stylesheet" href="path/to/cbn-sharing.css">
 ```
 
