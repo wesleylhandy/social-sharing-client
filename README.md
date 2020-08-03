@@ -1,6 +1,6 @@
-# CBN Sharing Client Documentation
+# CBN Share Client Documentation
 
-The **CBN Sharing Client** provides configurable social sharing functionality for Facebook, Twitter, and/or Email. Built off the `cbnShare API`, this **Client** will either create `click` event handlers for preexisting buttons or generate styled buttons with event handlers to pass social sharing data to the `cbnShare API` which will in turn trigger alternately Facebook, Twitter, or Email shares of the page according to configuration.
+The **CBN Share Client** provides configurable social sharing functionality for Facebook, Twitter, and/or Email. Built off the `cbnShare API`, this **Client** will either create `click` event handlers for preexisting buttons or generate styled buttons with event handlers to pass social sharing data to the `cbnShare API` which will in turn trigger alternately Facebook, Twitter, or Email shares of the page according to configuration.
 
 ## How It Works
 
@@ -8,11 +8,11 @@ The **CBN Sharing Client** should be loaded onto the DOM via asychronous, non-bl
 
 ```html
 <script async src="/path/to/cbn-share-api.js">
-<script async src="/path/to/cbn-sharing-client.js">
-<link rel="stylesheet" href="path/to/cbn-sharing.css">
+<script async src="/path/to/cbn-share-client.js">
+<link rel="stylesheet" href="path/to/cbn-share.css">
 ```
 
-Once loaded, the **Client** appends the `cbnSharingClient` to the global object, in this case `window`, and then initializes itself. During initialization, the **Client** first looks for `<div>` or other block-level containers, that match the selector `[data-social-icons='wrapper']`, and fills them with sharing buttons with a set of configurations to be discussed below, then it looks for existing html `<button>` elements having `data-social` attributes defined, to attach `click` event listeners. When a matching button is clicked, then the **Client** calls the `cbnShare API` with the relevant data.
+Once loaded, the **Client** appends the `cbnShareClient` to the global object, in this case `window`, and then initializes itself. During initialization, the **Client** first looks for `<div>` or other block-level containers, that match the selector `[data-social-icons='wrapper']`, and fills them with sharing buttons with a set of configurations to be discussed below, then it looks for existing html `<button>` elements having `data-social` attributes defined, to attach `click` event listeners. When a matching button is clicked, then the **Client** calls the `cbnShare API` with the relevant data.
 
 Buttons can be configured with custom values, or the **Client** will pull the page from `<meta>` tags defined with `og` and `twitter` sharing attributes. It also will pull from the `<title>` tag, `<link rel="canonical">` tag, and `window.location.href` to fill in any missing attributes.
 
@@ -230,9 +230,9 @@ The final data-attribute that can be added to the sharing container is `data-but
 ### Loading Buttons or Button Containers Dynamically
 
 ```javascript
-cbnSharingClient.load()
+cbnShareClient.load()
 ```
 
 With any type of asynchronously loading or dynamic rendering of html, there is a need to both generate buttons and attach listeners asynchronously. This is very simple and easy to do.
 
-The **Client** exposes a method on the window that can be called in response to dynamic loading. Once the elements attached to the DOM (even if they are hidden), you can call `cbnSharingClient.load()` and icons will be generated where applicable and listeners attached as well.
+The **Client** exposes a method on the window that can be called in response to dynamic loading. Once the elements attached to the DOM (even if they are hidden), you can call `cbnShareClient.load()` and icons will be generated where applicable and listeners attached as well.

@@ -1,5 +1,5 @@
 !(function (global) {
-  class CBNSharingClient {
+  class CBNShareClient {
     constructor() {
       this.buttons = null;
       this.appId = null;
@@ -63,7 +63,7 @@
     }
 
     /**
-     * window.cbnSharingClient.load()
+     * window.cbnShareClient.load()
      * Function to called after sharing buttons are added to the DOM dynamically
      */
     load() {
@@ -294,9 +294,9 @@
     }
   }
 
-  if (typeof global.cbnSharingClient !== CBNSharingClient) {
+  if (typeof global.cbnShareClient !== CBNShareClient) {
     // add this class to the global scope so it can be called from the DOM
-    global.cbnSharingClient = new CBNSharingClient();
+    global.cbnShareClient = new CBNShareClient();
   }
 
   // check document.readyState to support asynchronous loading of this script
@@ -311,9 +311,9 @@
 
   function initSharingClient() {
     try {
-      cbnSharingClient.init();
+      cbnShareClient.init();
     } catch (err) {
-      console.error('Unable to Initialize CBNSharingClient');
+      console.error('Unable to Initialize CBNShareClient');
       console.error(err);
     }
   }
