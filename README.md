@@ -4,10 +4,11 @@ The **CBN Sharing Client** provides configurable social sharing functionality fo
 
 ## How It Works
 
-The **CBN Sharing Client** should be loaded onto the DOM via asychronous, non-blocking Javascript.
+The **CBN Sharing Client** should be loaded onto the DOM via asychronous, non-blocking Javascript, as should the `cbnShare API`.
 
 ```html
-<script async src="/path/to/cbnsharing-client-sdk.js">
+<script async src="/path/to/cbn-share-api.js">
+<script async src="/path/to/cbnsharing-client.js">
 <link rel="stylesheet" href="path/to/cbn-sharing.css">
 ```
 

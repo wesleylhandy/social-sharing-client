@@ -15,7 +15,9 @@
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.4",
     "jest": "^26.2.2",
-    "prettier": "^2.0.5"
+    "prettier": "^2.0.5",
+    "prettier-eslint": "^11.0.0",
+    "v8-to-istanbul": "^5.0.0"
   },
   "engines": {
     "node": ">=12.7.0"
