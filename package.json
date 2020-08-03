@@ -1,0 +1,28 @@
+{
+  "name": "cbn-social-sharing",
+  "version": "1.0.0",
+  "description": "Library for triggering social shares on CBN properties",
+  "main": "index.js",
+  "repository": "git@bitbucket.org:cbndev/cbn-social-sharing-library.git",
+  "author": "Wesley L. Handy <wesley.handy@cbn.org>",
+  "license": "Proprietary",
+  "private": true,
+  "devDependencies": {
+    "@testing-library/dom": "^7.21.7",
+    "@testing-library/jest-dom": "^5.11.2",
+    "eslint": "^7.6.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "jest": "^26.2.2",
+    "prettier": "^2.0.5"
+  },
+  "engines": {
+    "node": ">=12.7.0"
+  },
+  "scripts": {
+    "lint": "eslint ./src --ext js",
+    "format": "eslint ./src --ext js --fix",
+    "test": "jest"
+  }
+}
