@@ -33,10 +33,12 @@ Then within the `<body>` tag, wherever you want to have social icons generated, 
 </body>
 ```
 
-The `CBNShareIcons` control takes three optional parameters: `ButtonType`, `ButtonsObject`, and `IsAsync`.
+The `CBNShareIcons` control takes four optional parameters: `ButtonType`, `ButtonsObject`, `IsAsync`, and `CssClass`.
 
 `ButtonType` defaults to `default` but will accept the values of `icons-only` or `text-only`.
 
 `ButtonsObject` takes a JSON-serialized String. See [JSON-encoded `data-buttons` Object](../../README.md#markdown-header-json-encoded-data-buttons-object) for instructions on how to format this String.
 
 Use `IsAsync` for any controls that will be dynamically-rendered on the page in response to some event. The default value is `false`.
+
+Pass in a string of CSS classnames, like you would set the regular HTML `class` attribute, to `CssClass` to add a custom CSS class to the containing div.

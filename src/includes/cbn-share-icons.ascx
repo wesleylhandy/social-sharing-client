@@ -4,7 +4,7 @@
 <%@ Import Namespace="Newtonsoft.Json.Schema"%>
 <script runat="server">
     private bool _isAsync = false;
-    public string IsAsync {
+    public bool IsAsync {
         get { return _isAsync; }
         set {
             _isAsync = value;
@@ -67,8 +67,16 @@
             _buttonsObject = JsonConvert.SerializeObject(parsed);
         }
     }
+    private string cssClass = "";
+    public string CssClass {
+        get { return cssClass; }
+        set {
+            cssClass = value;
+        }
+    }
 </script>
 <div
+    class="<%=CssClass%>"
     data-generated="false"
     data-social-icons="wrapper"
     data-button-type="<%=ButtonType%>"

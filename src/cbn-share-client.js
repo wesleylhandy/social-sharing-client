@@ -258,8 +258,8 @@
           break;
         default:
           img = document.createElement('img');
-          img.setAttribute('height', 22);
-          img.setAttribute('width', 22);
+          img.setAttribute('height', 25);
+          img.setAttribute('width', 25);
           img.src =
             social === 'facebook'
               ? this[`${social}SVG`]
