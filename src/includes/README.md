@@ -6,12 +6,14 @@ This folder includes three separate controls that can be used to place Social Sh
 
 For any `dotNet` page, you must register these custom controls at the top of your page:
 
-```c#
+
+```csharp
 <%@ Page Language="C#" %>
 <%@ Register TagPrefix="cc" Src="~/noindex/scripts/social/includes/cbn-share-api.ascx" TagName="CBNShareApi" %>
 <%@ Register TagPrefix="cc" Src="~/noindex/scripts/social/includes/cbn-share-client.ascx" TagName="CBNShareClient" %>
 <%@ Register TagPrefix="cc" Src="~/noindex/scripts/social/includes/cbn-share-icons.ascx" TagName="CBNShareIcons" %>
 ```
+
 
 Within the `<head>` of your `document`, before the closing `</head>` tag, include either, but most likely both, `CBNShareApi` and `CBNShareClient` controls:
 
