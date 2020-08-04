@@ -14,12 +14,12 @@ The **CBN Sharing Client** should be loaded onto the DOM via asychronous, non-bl
         s.id = n
         s.type = 'text/javascript';
         s.async = true;
-        s.src = '/noindex/scripts/social/cbn-share-api.js?ver=1.0';
+        s.src = 'https://www.cbn.com/noindex/scripts/social/cbn-share-api.js?ver=1.0';
         var x = c.getElementsByTagName('script')[0];
         x.parentNode.insertBefore(s, x);
     })(document,"script","cbn-share-api");
 </script>
-<link rel="stylesheet" href='/noindex/scripts/social/cbn-share.css?ver=1.0' />
+<link rel="stylesheet" href='https://www.cbn.com/noindex/scripts/social/cbn-share.css?ver=1.0' />
 <script>
     (function (c,b,n,share) {
         if (c.getElementById(n)) return;
@@ -27,7 +27,7 @@ The **CBN Sharing Client** should be loaded onto the DOM via asychronous, non-bl
         s.id = n
         s.type = 'text/javascript';
         s.async = true;
-        s.src = '/noindex/scripts/social/cbn-share-client.js?ver=1.0';
+        s.src = 'https://www.cbn.com/noindex/scripts/social/cbn-share-client.js?ver=1.0';
         var x = c.getElementsByTagName(b)[0];
         x.parentNode.insertBefore(s, x);
     })(document,"script","cbn-share-client");
