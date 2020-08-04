@@ -88,10 +88,10 @@ if (IsAsync)
 %>
 <script>
 try{
-    cbnSharingClient.load()
+    cbnShareClient.load()
 } catch(e) {
     console.error(e)
-    console.error("Unable to load CBNSharingClient Asynchronously")
+    console.error("Unable to load CBNShareClient Asynchronously")
 }
 </script>
 <%
