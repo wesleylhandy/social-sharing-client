@@ -7,9 +7,31 @@ The **CBN Share Client** provides configurable social sharing functionality for 
 The **CBN Sharing Client** should be loaded onto the DOM via asychronous, non-blocking Javascript, as should the `cbnShare API`.
 
 ```html
-<script async src="/path/to/cbn-share-api.js">
-<script async src="/path/to/cbn-share-client.js">
-<link rel="stylesheet" href="path/to/cbn-share.css">
+<script>
+    (function (c,b,n,share) {
+        if (c.getElementById(n)) return;
+        var s = c.createElement(b);
+        s.id = n
+        s.type = 'text/javascript';
+        s.async = true;
+        s.src = '/noindex/scripts/social/cbn-share-api.js?ver=1.0';
+        var x = c.getElementsByTagName('script')[0];
+        x.parentNode.insertBefore(s, x);
+    })(document,"script","cbn-share-api");
+</script>
+<link rel="stylesheet" href='/noindex/scripts/social/cbn-share.css?ver=1.0' />
+<script>
+    (function (c,b,n,share) {
+        if (c.getElementById(n)) return;
+        var s = c.createElement(b);
+        s.id = n
+        s.type = 'text/javascript';
+        s.async = true;
+        s.src = '/noindex/scripts/social/cbn-share-client.js?ver=1.0';
+        var x = c.getElementsByTagName(b)[0];
+        x.parentNode.insertBefore(s, x);
+    })(document,"script","cbn-share-client");
+</script>
 ```
 
 Once loaded, the **Client** appends the `cbnShareClient` to the global object, in this case `window`, and then initializes itself. During initialization, the **Client** first looks for `<div>` or other block-level containers, that match the selector `[data-social-icons='wrapper']`, and fills them with sharing buttons with a set of configurations to be discussed below, then it looks for existing html `<button>` elements having `data-social` attributes defined, to attach `click` event listeners. When a matching button is clicked, then the **Client** calls the `cbnShare API` with the relevant data.
