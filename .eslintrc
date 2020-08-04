@@ -7,10 +7,14 @@
     "extends": [
         "google",
         "eslint:recommended",
-        "prettier"
+        "prettier",
+        "plugin:testing-library/recommended",
+        "plugin:jest-dom/recommended"
     ],
     "plugins": [
-        "prettier"
+        "prettier",
+        "testing-library",
+        "jest-dom"
     ],
     "globals": {
         "Atomics": "readonly",
