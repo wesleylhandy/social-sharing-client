@@ -22,6 +22,7 @@
       this.emailWhiteSVG = `data:image/svg+xml;base64,${btoa(
         '<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="107.4px" height="75.2px" viewBox="0 0 107.4 75.2" style="enable-background:new 0 0 107.4 75.2" xml:space="preserve"><style>.st3{fill:#fff}</style><path class="st3" d="M8.5,4.4l38.7,30.6c1.8,1.4,4.2,2,6.5,1.9c2.3,0.1,4.8-0.5,6.5-1.9L98.9,4.4C102,2,101.3,0,97.3,0H53.7H10 C6.1,0,5.4,2,8.5,4.4z"/><path class="st3" d="M101.7,12.5L59.4,44.6c-1.6,1.2-3.7,1.8-5.7,1.7c-2.1,0-4.1-0.6-5.7-1.7L5.7,12.5C2.6,10.1,0,11.4,0,15.4V68 c0,3.9,3.2,7.2,7.2,7.2h46.5h46.5c3.9,0,7.2-3.2,7.2-7.2V15.4C107.4,11.4,104.8,10.1,101.7,12.5z"/></svg>'
       )}`;
+      this.handleSharingButtonClick = this.handleSharingButtonClick.bind(this) 
     }
 
     /**
@@ -131,7 +132,7 @@
           break;
         case 'email':
           sharingObj.service = 'email';
-          sharingObj.subject =
+          sharingObj.title =
             dataset.subject || 'I found this resource to share with you!';
           sharingObj.url =
             dataset.url || this.canonical || window.location.href;
