@@ -20,12 +20,12 @@ Within the `<head>` of your `document`, before the closing `</head>` tag, includ
 ```html
 <head>
     <!-- all the other tags belonging to the head -->
-    <cc:CBNShareApi Version="1.0" runat="server"></cc:CBNShareApi> 
-    <cc:CBNShareClient Version="1.0" runat="server"></cc:CBNShareClient> 
+    <cc:CBNShareApi runat="server"></cc:CBNShareApi> 
+    <cc:CBNShareClient runat="server"></cc:CBNShareClient> 
 </head>
 ```
 
-Both controls accept a `Version` attribute, that defaults to `1.0`.
+Both controls accept a `Version` attribute, that defaults to `1.0`. It is *highly recommended* to not set the Version attribute on the control to allow that to be managed by the control itself. However, if you must update the version, increment the minor version, not the major version. So, `1.0 => 1.1`, NOT, `1.0 => 2.0`.
 
 Then within the `<body>` tag, wherever you want to have social icons generated, add the `CBNShareIcons` control. Be sure to give a unique `ID` attribute to each instance of this control:
 
@@ -43,4 +43,16 @@ The `CBNShareIcons` control takes four optional parameters: `ButtonType`, `Butto
 
 Use `IsAsync` for any controls that will be dynamically-rendered on the page in response to some event. The default value is `false`.
 
+Use `IsCenter` to center horizontally the controls within their container, by setting it's value to `true`. The default value is `false` and the buttons will be left-justified.
+
 Pass in a string of CSS classnames, like you would set the regular HTML `class` attribute, to `CssClass` to add a custom CSS class to the containing div.
+
+```html
+<cc:CBNShareIcons 
+    ButtonType="icons-only" 
+    IsAsync="false" 
+    IsCenter="true" 
+    id="ShareIcons1" 
+    runat="server"
+/>
+```

@@ -3,6 +3,13 @@
 <%@ Import Namespace="Newtonsoft.Json.Linq"%>
 <%@ Import Namespace="Newtonsoft.Json.Schema"%>
 <script runat="server">
+    private bool _isCenter = false;
+    public bool IsCenter {
+        get { return _isCenter; }
+        set {
+            _isCenter = value;
+        }
+    }
     private bool _isAsync = false;
     public bool IsAsync {
         get { return _isAsync; }
@@ -81,6 +88,14 @@
     data-social-icons="wrapper"
     data-button-type="<%=ButtonType%>"
     data-buttons='<%=ButtonsObject%>'
+    <%
+    if (IsCenter)
+    {
+    %>
+    style="-webkit-box-pack: center; -ms-flex-pack: center; justify-content: center"
+    <%
+    }
+    %>
 ></div>
 <%
 if (IsAsync)
