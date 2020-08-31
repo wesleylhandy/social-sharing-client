@@ -1,7 +1,7 @@
 !(function (global) {
   const serviceDefaults = {
     facebook: {
-      appId: '1502252596761352',
+      appId: '523063787780141',
       autoLogAppEvents: true,
       xfbml: true,
       version: 'v5.0',
