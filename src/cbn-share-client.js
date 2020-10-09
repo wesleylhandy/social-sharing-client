@@ -42,23 +42,9 @@
       this.ogUrl = ogUrlMeta && ogUrlMeta.getAttribute('content');
       this.appId = appIdMeta && appIdMeta.getAttribute('content');
       this.title = title && title.textContent;
-      // canonical links can be relative
+      // canonical links can be relative but href attribute returns the entire URL
       this.canonical = canonical && canonical.href;
 
-      try {
-        // includes needs polyfill for IE 11
-        if (
-          this.canonical &&
-          !this.canonical.includes(window.location.origin)
-        ) {
-          this.canonical = window.location.origin + this.canonical;
-        }
-      } catch (err) {
-        console.error('Unable to Append Origin to Canonical');
-        console.error(err);
-        // not sure if you can share relative links
-        this.canonical = null;
-      }
       this.generateSharingButtons();
       this.addClickListenerToButtons();
     }
