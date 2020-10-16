@@ -44,7 +44,6 @@
       this.title = title && title.textContent;
       // canonical links can be relative but href attribute returns the entire URL
       this.canonical = canonical && canonical.href;
-
       this.generateSharingButtons();
       this.addClickListenerToButtons();
     }
@@ -172,7 +171,7 @@
       const socialWrappers = document.querySelectorAll(
         "[data-social-icons='wrapper']"
       );
-      socialWrappers.forEach((wrapper) => {
+      socialWrappers.forEach((wrapper, wrapperIdx) => {
         const dataset = wrapper.dataset;
         // only load buttons once using generated dataset
         const generated = dataset.generated;
@@ -184,24 +183,103 @@
           const socialButtons = dataset.buttons
             ? JSON.parse(dataset.buttons)
             : {};
-          Object.keys(socialButtons).forEach((socialBtn) => {
+          Object.keys(socialButtons).forEach((socialBtn, socialBtnIdx) => {
             const social = socialBtn.toLowerCase();
             const dataset =
               Object.keys(socialButtons).length > 0
                 ? socialButtons[social]
                 : {};
+            if (social === 'sharing') {
+              const shareCount = this.generateShareCount({
+                dataset,
+                id: `share_count-${wrapperIdx}-${socialBtnIdx}`,
+              });
+              wrapper.appendChild(shareCount);
+            } else {
+              const btn = this.generateSharingButton({
+                social,
+                dataset,
+                buttonType,
+              });
 
-            const btn = this.generateSharingButton({
-              social,
-              dataset,
-              buttonType,
-            });
-
-            wrapper.appendChild(btn);
+              wrapper.appendChild(btn);
+            }
           });
           dataset.generated = true;
         }
       });
+    }
+    
+    /**
+     * Internal function to generate share counts on a given page
+     * @param {Object} dataset - values passed to configuration object for sharing
+     * @param {String} id - specific id for the like display container
+     */
+    generateShareCount(dataset, id) {
+      const shareCount = document.createElement('div');
+      shareCount.classList.add('share-count');
+      shareCount.id = id;
+      const countValue = document.createElement('div');
+      countValue.classList.add('count-value');
+      const countLabel = document.createElement('div');
+      countLabel.classList.add('count-label');
+      shareCount.appendChild(countValue);
+      shareCount.appendChild(countLabel);
+      const sharingUrl =
+        dataset.url || this.ogUrl || this.canonical || window.location.href;
+      this.getFacebookEngagement(sharingUrl)
+        .then((engagement) => {
+          console.log(engagement);
+          this.animateShareCount({ shareCount: engagement.share_count, id });
+        })
+        .catch((err) => {
+          console.error(err);
+          omTrackDebug(
+            'CBNShareClient - generateShareCount - SharingUrl: ' + sharingUrl,
+            'Error - ' + err
+          );
+        });
+      return shareCount;
+    }
+
+    /**
+     * Internal function to recursively animate the share count
+     * @param {Number} shareCount - number received from graph api
+     * @param {String} id - specific id for the like display container
+     */
+    animateShareCount(shareCount, id) {
+      const countValue = document.querySelector(`#${id} > .count-value`);
+      const totalTime = 1500;
+      let start = null;
+
+      const formatShareCount = (count) => {
+        let shareText = '';
+
+        if (count > 999) {
+          var thousandths = Math.floor(count / 1000);
+          var remainder = count % 1000;
+          var hundredths = Math.floor(remainder / 100);
+          shareText = thousandths + '.' + hundredths + 'K';
+        } else {
+          shareText = parseInt(count);
+        }
+
+        return shareText;
+      };
+
+      const animate = (time) => {
+        start = start ? start : time;
+        const timeProgress = (time - start) / totalTime;
+
+        if (timeProgress <= 1) {
+          const multiplier = Math.sin((timeProgress * Math.PI) / 2.0);
+          const shareText = formatShareCount(shareCount * multiplier);
+          countValue.textContent = shareText;
+          window.requestAnimationFrame(animate);
+        }
+      };
+
+      window.requestAnimationFrame(animate);
     }
 
     /**
@@ -278,6 +356,32 @@
         btn.appendChild(span);
       }
       return btn;
+    }
+
+    getFacebookEngagement(sharingUrl) {
+      return new Promise((resolve, reject) =>
+        fetch(
+          'https://www.cbn.com/noindex/scripts/social/api/fb-graph-shares.aspx?sharing_url=' +
+            encodeURIComponent(sharingUrl),
+          { mode: 'cors' }
+        )
+          .then((res) => {
+            if (res.status >= 200 && res.status < 300) {
+              return res.json();
+            } else {
+              return {
+                error: { message: 'Invalid Internal API Response' },
+              };
+            }
+          })
+          .then((res) => {
+            if (res.error) {
+              reject(res.error.message);
+            } else {
+              resolve(res.engagement);
+            }
+          })
+      );
     }
   }
 
