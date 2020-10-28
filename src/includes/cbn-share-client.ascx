@@ -1,6 +1,6 @@
 <%@ Language="C#" %>
 <script runat="server">
-    private string _version = "1.2";
+    private string _version = "1.3";
     public string Version {
         get { return _version; }
         set {

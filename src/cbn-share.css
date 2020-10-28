@@ -39,7 +39,11 @@
 	font-size: 19px;
 	font-family: 'proxima-nova', 'ProximaNovaSBold', 'proximanova-semibold', Arial, Helvetica, sans-serif;
 	font-weight: 600;
-	font-style: normal;
+	font-style: italic;
+}
+
+.share-count > .count-label {
+	margin-left: 5px;
 }
 
 button.social.button {

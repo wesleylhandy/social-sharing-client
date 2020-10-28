@@ -165,7 +165,7 @@
      *   \>\</div>
      *
      * Example data-buttons:
-     *   data-buttons='{"facebook":{"appId":"","url":"","text":"","hashtag":"","text":""},"twitter":{"text":"","url":"","hashtags":"","via":"","related":""},"email":{"title": "", "text": "", "url": ""}}'
+     *   data-buttons='{"sharing":{"url":"","label":""},"facebook":{"appId":"","url":"","text":"","hashtag":"","text":""},"twitter":{"text":"","url":"","hashtags":"","via":"","related":""},"email":{"title": "", "text": "", "url": ""}}'
      */
     generateSharingButtons() {
       const socialWrappers = document.querySelectorAll(
@@ -209,28 +209,33 @@
         }
       });
     }
-    
+
     /**
      * Internal function to generate share counts on a given page
-     * @param {Object} dataset - values passed to configuration object for sharing
-     * @param {String} id - specific id for the like display container
+     * @param {Object} param0 - An Object used to generate the share count
+     * @param {Object} param0.dataset - values passed to configuration object for sharing
+     * @param {String} param0.id - specific id for the like display container
+     * @return {String} shareCount -  the textContent for Sharing div
      */
-    generateShareCount(dataset, id) {
+    generateShareCount({dataset, id}) {
       const shareCount = document.createElement('div');
-      shareCount.classList.add('share-count');
       shareCount.id = id;
-      const countValue = document.createElement('div');
-      countValue.classList.add('count-value');
-      const countLabel = document.createElement('div');
-      countLabel.classList.add('count-label');
-      shareCount.appendChild(countValue);
-      shareCount.appendChild(countLabel);
       const sharingUrl =
         dataset.url || this.ogUrl || this.canonical || window.location.href;
       this.getFacebookEngagement(sharingUrl)
         .then((engagement) => {
           console.log(engagement);
-          this.animateShareCount({ shareCount: engagement.share_count, id });
+          if (engagement && engagement.share_count > 9) {
+            shareCount.classList.add('share-count');
+            const countValue = document.createElement('div');
+            countValue.classList.add('count-value');
+            const countLabel = document.createElement('div');
+            countLabel.classList.add('count-label');
+            countLabel.textContent = dataset.label || "shares";
+            shareCount.appendChild(countValue);
+            shareCount.appendChild(countLabel);
+            this.animateShareCount({ shareCount: engagement.share_count, id });
+          }
         })
         .catch((err) => {
           console.error(err);
@@ -244,10 +249,11 @@
 
     /**
      * Internal function to recursively animate the share count
-     * @param {Number} shareCount - number received from graph api
-     * @param {String} id - specific id for the like display container
+     * @param {Object} param0 - An Object used to animate share count
+     * @param {Number} param0.shareCount - number received from graph api
+     * @param {String} param0.id - specific id for the like display container
      */
-    animateShareCount(shareCount, id) {
+    animateShareCount({shareCount, id}) {
       const countValue = document.querySelector(`#${id} > .count-value`);
       const totalTime = 1500;
       let start = null;
@@ -256,9 +262,9 @@
         let shareText = '';
 
         if (count > 999) {
-          var thousandths = Math.floor(count / 1000);
-          var remainder = count % 1000;
-          var hundredths = Math.floor(remainder / 100);
+          const thousandths = Math.floor(count / 1000);
+          const remainder = count % 1000;
+          const hundredths = Math.floor(remainder / 100);
           shareText = thousandths + '.' + hundredths + 'K';
         } else {
           shareText = parseInt(count);
@@ -267,6 +273,10 @@
         return shareText;
       };
 
+      /**
+       * Private recursive function scoped to Animate Share Count that calls RAF to update UI with new value
+       * @param {Number} time 
+       */
       const animate = (time) => {
         start = start ? start : time;
         const timeProgress = (time - start) / totalTime;
