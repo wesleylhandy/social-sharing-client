@@ -286,6 +286,11 @@
           const shareText = formatShareCount(shareCount * multiplier);
           countValue.textContent = shareText;
           window.requestAnimationFrame(animate);
+        } else {
+          // in case animate stops short of final count, update to final count
+          if (countValue.textContent != shareCount) {
+            countValue.textContent = formatShareCount(shareCount);
+          }
         }
       };
 
