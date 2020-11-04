@@ -217,7 +217,7 @@
      * @param {String} param0.id - specific id for the like display container
      * @return {String} shareCount -  the textContent for Sharing div
      */
-    generateShareCount({dataset, id}) {
+    generateShareCount({ dataset, id }) {
       const shareCount = document.createElement('div');
       shareCount.id = id;
       const sharingUrl =
@@ -231,7 +231,7 @@
             countValue.classList.add('count-value');
             const countLabel = document.createElement('div');
             countLabel.classList.add('count-label');
-            countLabel.textContent = dataset.label || "shares";
+            countLabel.textContent = dataset.label || 'shares';
             shareCount.appendChild(countValue);
             shareCount.appendChild(countLabel);
             this.animateShareCount({ shareCount: engagement.share_count, id });
@@ -253,7 +253,7 @@
      * @param {Number} param0.shareCount - number received from graph api
      * @param {String} param0.id - specific id for the like display container
      */
-    animateShareCount({shareCount, id}) {
+    animateShareCount({ shareCount, id }) {
       const countValue = document.querySelector(`#${id} > .count-value`);
       const totalTime = 1500;
       let start = null;
@@ -275,7 +275,7 @@
 
       /**
        * Private recursive function scoped to Animate Share Count that calls RAF to update UI with new value
-       * @param {Number} time 
+       * @param {Number} time
        */
       const animate = (time) => {
         start = start ? start : time;

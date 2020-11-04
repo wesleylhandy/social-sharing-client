@@ -20,10 +20,10 @@
 	display: -webkit-box;
 	display: -ms-flexbox;
 	display: flex;
-	-webkit-box-orient: horizontal;
+	-webkit-box-orient: vertical;
 	-webkit-box-direction: normal;
-		-ms-flex-direction: row;
-			flex-direction: row;
+		-ms-flex-direction: column;
+			flex-direction: column;
 	-webkit-box-pack: center;
 		-ms-flex-pack: center;
 			justify-content: center;
@@ -33,17 +33,25 @@
 	border: none;
 	padding: 0 2px;
 	margin: 2px;
-	line-height: 30px;
+	height: 30px;
 	text-align: center;
-	color: inherit;
-	font-size: 19px;
-	font-family: 'proxima-nova', 'ProximaNovaSBold', 'proximanova-semibold', Arial, Helvetica, sans-serif;
-	font-weight: 600;
-	font-style: italic;
+	color: #3c5d96;
 }
 
+.share-count > .count-value {
+	font-family: 'proxima-nova', 'ProximaNovaSBold', 'proximanova-semibold', Arial, Helvetica, sans-serif;
+	font-weight: 600;
+	font-style: normal;
+	font-size: 22px;
+	margin-top: -1px;
+    margin-bottom: -4px;
+}
 .share-count > .count-label {
-	margin-left: 5px;
+	font-family:  'proxima-nova', 'ProximaNovaLight', 'proximanova-light', Arial,sans-serif;
+	font-weight: 300;
+	font-style: italic;
+	text-transform: uppercase;
+	font-size: 12px;
 }
 
 button.social.button {
