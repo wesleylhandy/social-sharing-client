@@ -15,7 +15,7 @@
         if (!IsPostBack)
         {
             string originValue = Request.Url.DnsSafeHost.ToLower();
-            String[] validOrigins = new String[] { "localhost", "pre.vb.cbn.local", "cbn.com", "www.cbn.com", "www1.cbn.com", "event.cbn.com", "secure.cbn.com", "impact.cbn.com" };
+            String[] validOrigins = new String[] { "localhost" };
             if ( Array.IndexOf(validOrigins, originValue) > -1 )
             {
                 Response.AppendHeader("Access-Control-Allow-Origin", "*");

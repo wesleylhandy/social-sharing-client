@@ -1,40 +1,40 @@
-# CBN Share Client Documentation
+# Social Sharing Client Documentation
 
-The **CBN Share Client** provides configurable social sharing functionality for Facebook, Twitter, and/or Email. Built off the `cbnShare API`, this **Client** will either create `click` event handlers for preexisting buttons or generate styled buttons with event handlers to pass social sharing data to the `cbnShare API` which will in turn trigger alternately Facebook, Twitter, or Email shares of the page according to configuration.
+The **Social Sharing Client** provides configurable social sharing functionality for Facebook, Twitter, and/or Email. Built off the `socialShare API`, this **Client** will either create `click` event handlers for preexisting buttons or generate styled buttons with event handlers to pass social sharing data to the `socialShare API` which will in turn trigger alternately Facebook, Twitter, or Email shares of the page according to configuration.
 
 ## How It Works
 
-The **CBN Sharing Client** should be loaded onto the DOM via asychronous, non-blocking Javascript, as should the `cbnShare API`.
+The **Social Sharing Client** should be loaded onto the DOM via asychronous, non-blocking Javascript, as should the `socialShare API`.
 
 ```html
 <script>
-    (function (c,b,n,share) {
-        if (c.getElementById(n)) return;
-        var s = c.createElement(b);
-        s.id = n
-        s.type = 'text/javascript';
-        s.async = true;
-        s.src = 'https://www.cbn.com/noindex/scripts/social/cbn-share-api.js?ver=1.0';
-        var x = c.getElementsByTagName('script')[0];
-        x.parentNode.insertBefore(s, x);
-    })(document,"script","cbn-share-api");
+    (function (s,h,a,r,e) {
+        if (s.getElementById(a)) return;
+        var j = s.createElement(h);
+        j.id = a
+        j.type = 'text/javascript';
+        j.async = true;
+        j.src = '<https://origin/path/to/source/js/api.js>?ver=1.0';
+        var x = s.getElementsByTagName(h)[0];
+        x.parentNode.insertBefore(j, x);
+    })(document,"script","social-share-api");
 </script>
-<link rel="stylesheet" href='https://www.cbn.com/noindex/scripts/social/cbn-share.css?ver=1.0' />
+<link rel="stylesheet" href='<https://origin/path/to/source/css>?ver=1.0' />
 <script>
-    (function (c,b,n,share) {
-        if (c.getElementById(n)) return;
-        var s = c.createElement(b);
-        s.id = n
-        s.type = 'text/javascript';
-        s.async = true;
-        s.src = 'https://www.cbn.com/noindex/scripts/social/cbn-share-client.js?ver=1.0';
-        var x = c.getElementsByTagName(b)[0];
-        x.parentNode.insertBefore(s, x);
-    })(document,"script","cbn-share-client");
+    (function (s,h,a,r,e) {
+        if (s.getElementById(a)) return;
+        var j = c.createElement(h);
+        j.id = a
+        j.type = 'text/javascript';
+        j.async = true;
+        j.src = '<https://origin/path/to/source/js/client.js>?ver=1.0';
+        var x = s.getElementsByTagName(h)[0];
+        x.parentNode.insertBefore(j, x);
+    })(document,"script","social-share-client");
 </script>
 ```
 
-Once loaded, the **Client** appends the `cbnShareClient` to the global object, in this case `window`, and then initializes itself. During initialization, the **Client** first looks for `<div>` or other block-level containers, that match the selector `[data-social-icons='wrapper']`, and fills them with sharing buttons with a set of configurations to be discussed below, then it looks for existing html `<button>` elements having `data-social` attributes defined, to attach `click` event listeners. When a matching button is clicked, then the **Client** calls the `cbnShare API` with the relevant data.
+Once loaded, the **Client** appends the `socialShareClient` to the global object, in this case `window`, and then initializes itself. During initialization, the **Client** first looks for `<div>` or other block-level containers, that match the selector `[data-social-icons='wrapper']`, and fills them with sharing buttons with a set of configurations to be discussed below, then it looks for existing html `<button>` elements having `data-social` attributes defined, to attach `click` event listeners. When a matching button is clicked, then the **Client** calls the `socialShare API` with the relevant data.
 
 Buttons can be configured with custom values, or the **Client** will pull the page from `<meta>` tags defined with `og` and `twitter` sharing attributes. It also will pull from the `<title>` tag, `<link rel="canonical">` tag, and `window.location.href` to fill in any missing attributes.
 
@@ -46,7 +46,7 @@ As mentioned above, the data used in social shares is prioritized based on how a
 
 *For detailed information on how the Facebook Share API works, see https://developers.facebook.com/docs/sharing/reference/share-dialog*
 
-The `cbnShare API` accepts the following sharing object:
+The `socialShare API` accepts the following sharing object:
 
 ```javascript
 const sharingObj = {
@@ -58,7 +58,7 @@ const sharingObj = {
 }
 ```
 
-The **appId** is an optional attribute. The `cbnShare API` works from a default Facebook App. However, where needed, this value can be passed in through a `data-appId` attribute or derived from a well-defined `<meta>` tag using the property `fb:app_id`.
+The **appId** is an optional attribute. The `socialShare API` works from a default Facebook App. However, where needed, this value can be passed in through a `data-appId` attribute or derived from a well-defined `<meta>` tag using the property `fb:app_id`.
 
 The **url** can be passed via a `data-url` attribute, be derived from `og:url` meta-tag, or default to `window.location.href`
 
@@ -70,7 +70,7 @@ The **hashtag** is a single hashtag that *must include* the preceding `#` charac
 
 *For detailed information on how Twitter Intents works, see https://developer.twitter.com/en/docs/twitter-for-websites/tweet-button/guides/web-intent*
 
-The `cbnShare API` accepts the following sharing object:
+The `socialShare API` accepts the following sharing object:
 
 ```javascript
 const sharingObj = {
@@ -97,9 +97,9 @@ The **related** attribute is tricky (refer to previously linked documentation on
 
 #### Email Sharing
 
-Rather than hardcoding `mailto` attributes, the `cbnShare API` will trigger the email share much like it does for other services.
+Rather than hardcoding `mailto` attributes, the `socialShare API` will trigger the email share much like it does for other services.
 
-The `cbnShare API` accepts the following sharing object:
+The `socialShare API` accepts the following sharing object:
 
 ```javascript
 const sharingObj = {
@@ -113,7 +113,7 @@ The **url** can be passed via a `data-url` attribute, be derived from the `canon
 
 The **subject** is what will be used for the **Email Subject Line**. This should be passed in via the `data-subject` attribute, or it will default to `"I found this resource to share with you!"`.
 
-The **text** attribute is the first line of the body of the email. *DO NOT* include the URL as part of this text. The `cbnShare API` will programmatically append the URL to the second line of the email body. Pass this in through the `data-text` attribute or it will default to (where `this.title` is the page `<title>`): 
+The **text** attribute is the first line of the body of the email. *DO NOT* include the URL as part of this text. The `socialShare API` will programmatically append the URL to the second line of the email body. Pass this in through the `data-text` attribute or it will default to (where `this.title` is the page `<title>`): 
 
 ```javascript
 `Here's the link for ${this.title}: `
@@ -156,7 +156,7 @@ For accessibility purposes, it is best practice to use the semantic `<button>` e
  * data-social="twitter"
  * data-social="email"
 
-This communicates to the `cbnShare API` what type of sharing action will be called. Any other values will be ignored and an error will be logged to the console.
+This communicates to the `socialShare API` what type of sharing action will be called. Any other values will be ignored and an error will be logged to the console.
 
 #### Optional Data Attributes
 
@@ -252,9 +252,9 @@ The final data-attribute that can be added to the sharing container is `data-but
 ### Loading Buttons or Button Containers Dynamically
 
 ```javascript
-cbnShareClient.load()
+socialShareClient.load()
 ```
 
 With any type of asynchronously loading or dynamic rendering of html, there is a need to both generate buttons and attach listeners asynchronously. This is very simple and easy to do.
 
-The **Client** exposes a method on the window that can be called in response to dynamic loading. Once the elements attached to the DOM (even if they are hidden), you can call `cbnShareClient.load()` and icons will be generated where applicable and listeners attached as well.
+The **Client** exposes a method on the window that can be called in response to dynamic loading. Once the elements attached to the DOM (even if they are hidden), you can call `socialShareClient.load()` and icons will be generated where applicable and listeners attached as well.

@@ -1,5 +1,5 @@
 !(function (global) {
-  class CBNShareClient {
+  class SocialShareClient {
     constructor() {
       this.buttons = null;
       this.appId = null;
@@ -49,7 +49,7 @@
     }
 
     /**
-     * window.cbnShareClient.load()
+     * window.SocialShareClient.load()
      * Function to called after sharing buttons are added to the DOM dynamically
      */
     load() {
@@ -70,7 +70,7 @@
     }
 
     /**
-     * Click Event Listener to grab data from elements and pass to cbnShare API
+     * Click Event Listener to grab data from elements and pass to socialShare API
      *
      * Expected:
      *   <button
@@ -133,14 +133,14 @@
           delete sharingObj[key];
         }
       }
-      if (typeof cbnShare === 'function') {
+      if (typeof socialShare === 'function') {
         // consider adding tracking call
-        cbnShare(sharingObj)
+        socialShare(sharingObj)
           .then(() => {
             console.log(`Shared to ${social}`);
             try {
-              // CBN Tracking Function for SHARING KPIs
-              omTrackShare(sharingObj.service, sharingObj.url);
+              // social Tracking Function for SHARING KPIs
+              // add tracking function
             } catch (err) {
               console.error('Unable to Call Tracking Function');
               console.error(err);
@@ -149,7 +149,7 @@
           .catch((err) => console.error(err));
       } else {
         // consider an alert here to DOM
-        console.error('cbnShare is not defined');
+        console.error('socialShare is not defined');
       }
     }
 
@@ -239,10 +239,7 @@
         })
         .catch((err) => {
           console.error(err);
-          omTrackDebug(
-            'CBNShareClient - generateShareCount - SharingUrl: ' + sharingUrl,
-            'Error - ' + err
-          );
+          // add tracking function
         });
       return shareCount;
     }
@@ -373,10 +370,11 @@
       return btn;
     }
 
+    // TO DO: Create Serverless Function to handle FB Engagment API
     getFacebookEngagement(sharingUrl) {
       return new Promise((resolve, reject) =>
         fetch(
-          'https://www.cbn.com/noindex/scripts/social/api/fb-graph-shares.aspx?sharing_url=' +
+          '' +
             encodeURIComponent(sharingUrl),
           { mode: 'cors' }
         )
@@ -400,9 +398,9 @@
     }
   }
 
-  if (typeof global.cbnShareClient !== CBNShareClient) {
+  if (typeof global.socialShareClient !== SocialShareClient) {
     // add this class to the global scope so it can be called from the DOM
-    global.cbnShareClient = new CBNShareClient();
+    global.socialShareClient = new SocialShareClient();
   }
 
   // check document.readyState to support asynchronous loading of this script
@@ -417,9 +415,9 @@
 
   function initSharingClient() {
     try {
-      cbnShareClient.init();
+      socialShareClient.init();
     } catch (err) {
-      console.error('Unable to Initialize CBNShareClient');
+      console.error('Unable to Initialize SocialShareClient');
       console.error(err);
     }
   }

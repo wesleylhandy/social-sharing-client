@@ -1,11 +1,11 @@
 {
-  "name": "cbn-social-sharing",
+  "name": "social-sharing-client",
   "version": "1.0.0",
-  "description": "Library for triggering social shares on CBN properties",
+  "description": "Library for triggering social shares",
   "main": "index.js",
-  "repository": "git@bitbucket.org:cbndev/cbn-social-sharing-library.git",
-  "author": "Wesley L. Handy <wesley.handy@cbn.org>",
-  "license": "Proprietary",
+  "repository": "git@github.com:wesleylhandy/social-sharing-client.git",
+  "author": "Wesley L. Handy <wesley@wearecreativ.media>",
+  "license": "MIT",
   "private": true,
   "devDependencies": {
     "@testing-library/dom": "^7.21.7",

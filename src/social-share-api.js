@@ -1,7 +1,7 @@
 !(function (global) {
   const serviceDefaults = {
     facebook: {
-      appId: '523063787780141',
+      appId: '',
       autoLogAppEvents: true,
       xfbml: true,
       version: 'v5.0',
@@ -10,7 +10,7 @@
       text: '',
       url: '',
       hashtags: '',
-      via: 'CBNonline',
+      via: '',
     },
     email: {
       subject: '',
@@ -128,7 +128,7 @@
     }
   };
 
-  global.cbnShare = function (options) {
+  global.socialShare = function (options) {
     return new Promise((resolve, reject) => {
       switch (options.service) {
         case 'facebook':
