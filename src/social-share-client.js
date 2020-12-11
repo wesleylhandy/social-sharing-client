@@ -373,11 +373,7 @@
     // TO DO: Create Serverless Function to handle FB Engagment API
     getFacebookEngagement(sharingUrl) {
       return new Promise((resolve, reject) =>
-        fetch(
-          '' +
-            encodeURIComponent(sharingUrl),
-          { mode: 'cors' }
-        )
+        fetch('' + encodeURIComponent(sharingUrl), { mode: 'cors' })
           .then((res) => {
             if (res.status >= 200 && res.status < 300) {
               return res.json();

@@ -89,7 +89,7 @@ The **text** is what we are prefilling as the tweet for the person sharing. This
 
 Twitter **hashtags** work differently than facebook. This should be a comma-separated-list of tags that *EXCLUDE* the preceding `#` character. No spaces and a very limited set of non-alphanumeric characters are available. This can be passed in through the `data-hashtags` attribute, or will default to an empty string.
 
-The **via** attribute is the Twitter username (excluding `@` character) of the account associated with the page or article. You can pass this in via the `data-via` attribute, or will default to `CBNOnline`
+The **via** attribute is the Twitter username (excluding `@` character) of the account associated with the page or article. You can pass this in via the `data-via` attribute.
 
 The **related** attribute is tricky (refer to previously linked documentation on how this should be encoded), but it's basically a urlencoded-comma-separated-pair comma-separated-list of twitter usernames with brief corresponding descriptions of those usernames that Twitter might recommend for a follow when someone opens the share dialog.
 
@@ -142,7 +142,7 @@ The **text** attribute is the first line of the body of the email. *DO NOT* incl
 Load the script and stylesheet onto your page, within your template, or via your custom control. You can do one or both of the following two things:
 
 1. Create Your Own Custom Sharing Buttons
-2. Create a Wrapper for Standard CBN Buttons to be Generated
+2. Create a Wrapper for Standard Buttons to be Generated
 
 ### Creating Your Own Custom Sharing Buttons
 
@@ -207,14 +207,14 @@ Thus would produce three buttons with `data` attributes matching the respective 
 ```javascript
 const buttons = { 
     facebook: { 
-        hashtag: "#CBNNewsAlert", 
+        hashtag: "#ImportantTag", 
         text: "Something catchy and important" 
     }, 
     twitter: { 
-        via: "CBNNews"
+        via: "Twitter_Handle"
     }, 
     email: { 
-        subject: "Do not miss this major CBN News Alert", 
+        subject: "Do not miss this major article", 
         text: "I think you will find this resource invaluable: "
     }
 }
@@ -226,7 +226,7 @@ const buttons = {
 <div 
     data-generated="false"
     data-social-icons="wrapper" 
-    data-buttons='{"facebook":{"text":"Something catchy and important","hashtag":"#CBNNewsAlert"},"twitter":{"via":"CBNNews"},"email":{"subject":"Do not miss this major CBN News Alert","text":"I think you will find this resource invaluable: "}}'
+    data-buttons='{"facebook":{"text":"Something catchy and important","hashtag":"#ImportantTag"},"twitter":{"via":"Twitter_Handle"},"email":{"subject":"Do not miss this major article","text":"I think you will find this resource invaluable: "}}'
 ></div>
 ```
 
